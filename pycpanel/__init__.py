@@ -34,7 +34,8 @@ class conn(object):
         except:
             unauthorised()
 
-    def api(self, command, params=None, api='json-api'):
+    def api(self, command, params=None, api='json-api', version=1):
+        command += '?api.version=' + str(version)
         r = self.__session__.get(self.hostname + api + '/' + command, params=params, verify=self.verify)
         if r.status_code == 403:
             unauthorised()
